@@ -1,283 +1,522 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Meston</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Meston</title>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <!-- Styles -->
-  <style>
-    :root {
-      --dark: #111;
-      --light: #fff;
-      --accent: #ff6f1e;
-      --gray: #f5f5f5;
-      --transition: 0.3s ease;
-    }
+<!-- Styles -->
+<style>
+:root {
+  --dark: #111;
+  --light: #fff;
+  --accent: #ff6f1e;
+  --gray: #f5f5f5;
+  --transition: 0.3s ease;
+}
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Inter", sans-serif;
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
 
-    body {
-      background: var(--light);
-      color: var(--dark);
-    }
+body {
+  background: var(--light);
+  color: var(--dark);
+}
 
-    /* --- NAVIGATION --- */
-    .nav {
-      width: 100%;
-      padding: 1.2rem 3rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: fixed;
-      top: 0;
-      left: 0;
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(10px);
-      z-index: 50;
-      border-bottom: 1px solid #ddd;
-    }
+/* --- NAVIGATION --- */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3rem;
+  width: 100%;
+  height: 80px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #ddd;
+  z-index: 100;
+}
 
-    .logo {
-      font-size: 1.4rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
+.logo {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
 
-    .nav-links a {
-      margin-left: 2rem;
-      text-decoration: none;
-      color: var(--dark);
-      font-weight: 500;
-      transition: var(--transition);
-    }
+/* CENTER SEARCH BAR */
+.search-box {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 0.6rem 1.4rem;
+  border-radius: 40px;
+  border: 1px solid #ccc;
+  width: 380px;
+  transition: var(--transition);
+}
 
-    .nav-links a:hover {
-      color: var(--accent);
-    }
+.search-box input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 1.05rem;
+  width: 100%;
+}
 
-    /* --- HERO SECTION (Bataleon inspired full-screen layout) --- */
-    .hero {
-      height: 100vh;
-      width: 100%;
-      background: url('https://shop.handylittleme.com/cdn/shop/products/ToteBagCrochetPattern_2_800x.jpg?v=1649766931') center/cover no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
+.search-box button {
+  background: var(--accent);
+  border: none;
+  color: white;
+  padding: 0.6rem 1rem;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
 
-    .hero::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      background: rgba(0,0,0,0.35);
-    }
+.search-box button:hover {
+  opacity: 0.85;
+}
 
-    .hero-content {
-      position: relative;
-      text-align: center;
-      color: white;
-    }
+.search-box:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 10px rgba(255,111,30,0.4);
+}
 
-    .hero h1 {
-      font-size: 4rem;
-      font-weight: 700;
-      letter-spacing: -1px;
-      margin-bottom: 1rem;
-    }
+/* --- RIGHT NAV LINKS --- */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  position: relative;
+}
 
-    .hero p {
-      font-size: 1.3rem;
-      margin-bottom: 2rem;
-    }
+.nav-right a {
+  text-decoration: none;
+  color: var(--dark);
+  font-weight: 700;
+  font-size: 1.2rem;
+  transition: var(--transition);
+}
 
-    .btn-main {
-      padding: 0.9rem 2.4rem;
-      font-size: 1.1rem;
-      background: var(--accent);
-      color: white;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: var(--transition);
-      font-weight: 600;
-    }
+.nav-right a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
 
-    .btn-main:hover {
-      opacity: 0.85;
-    }
+.nav-right i {
+  font-size: 1.6rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+}
 
-    /* --- PRODUCT GRID (clean Bataleon layout) --- */
-    .section {
-      padding: 6rem 3rem;
-    }
+.nav-right i:hover {
+  transform: scale(1.3);
+  color: var(--accent);
+}
 
-    .section-title {
-      text-align: center;
-      font-size: 2.4rem;
-      font-weight: 700;
-      margin-bottom: 3rem;
-    }
+/* --- DROPDOWNS --- */
+.dropdown {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  width: 300px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  display: none;
+  flex-direction: column;
+  z-index: 200;
+  padding: 10px;
+}
 
-    .products {
-      max-width: 1300px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2.5rem;
-    }
+.dropdown.active {
+  display: flex;
+}
 
-    .product-card {
-      background: var(--gray);
-      border-radius: 14px;
-      overflow: hidden;
-      transition: var(--transition);
-      cursor: pointer;
-    }
+.dropdown ul {
+  list-style: none;
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 0;
+  margin: 0;
+}
 
-    .product-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    }
+.dropdown li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+}
 
-    .product-card img {
-      width: 100%;
-      height: 260px;
-      object-fit: cover;
-    }
+.dropdown li button {
+  background: none;
+  border: none;
+  color: red;
+  cursor: pointer;
+  font-weight: 600;
+}
 
-    .product-body {
-      padding: 1.4rem;
-      text-align: center;
-    }
+/* --- HERO SECTION --- */
+.hero {
+  height: 100vh;
+  width: 100%;
+  background: url('https://shop.handylittleme.com/cdn/shop/products/ToteBagCrochetPattern_2_800x.jpg?v=1649766931') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
 
-    .product-body h3 {
-      font-size: 1.3rem;
-      margin-bottom: 0.4rem;
-    }
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,0.35);
+}
 
-    .price {
-      color: var(--accent);
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin-bottom: 1rem;
-    }
+.hero-content {
+  position: relative;
+  text-align: center;
+  color: white;
+}
 
-    .add-btn {
-      display: inline-block;
-      padding: 0.6rem 1.6rem;
-      background: var(--dark);
-      color: white;
-      text-decoration: none;
-      border-radius: 30px;
-      font-weight: 600;
-      transition: var(--transition);
-    }
+.hero h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 8px rgba(5,3,3,0.6);
+}
 
-    .add-btn:hover {
-      background: var(--accent);
-    }
+.btn-main {
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 600;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
 
-    /* --- FOOTER --- */
-    footer {
-      background: var(--dark);
-      color: white;
-      padding: 3rem;
-      text-align: center;
-      margin-top: 4rem;
-    }
+.btn-main:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
+}
 
-    footer a {
-      color: var(--accent);
-      text-decoration: none;
-    }
+/* --- PRODUCTS --- */
+.section {
+  padding: 6rem 3rem;
+}
 
-  </style>
+.section-title {
+  text-align: center;
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+}
+
+.products {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2.5rem;
+}
+
+.product-card {
+  background: var(--gray);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.product-card img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+}
+
+.product-body {
+  padding: 1.4rem;
+  text-align: center;
+}
+
+.product-body h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.price {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1.15rem;
+  margin-bottom: 1rem;
+}
+
+.add-btn, .fav-btn {
+  display: inline-block;
+  padding: 0.6rem 1.6rem;
+  margin: 4px;
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 600;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.add-btn { background: var(--dark); }
+.add-btn:hover { background: var(--accent); }
+
+.fav-btn { background: #f34303e1; }
+.fav-btn:hover { background: #ef3b04; }
+
+/* --- FOOTER --- */
+footer {
+  background: var(--dark);
+  color: white;
+  padding: 4rem 3rem;
+  text-align: center;
+}
+
+footer a {
+  color: var(--accent);
+  text-decoration: none;
+  margin: 0 0.5rem;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: #fff;
+}
+</style>
 </head>
 <body>
 
-  <!-- Navigation -->
-  <div class="nav">
-    <div class="nav-links">
-      <a href="#">Home</a>
-    </div>
-    <div class="logo">Meston</div>
-    <div class="nav-links">
-      <a href="#products">Products</a>
-    </div>
+<!-- Navigation -->
+<div class="nav">
+  <div class="logo">Meston</div>
+
+  <div class="search-box">
+    <input type="text" placeholder="Search products..." />
+    <button>🔍</button>
   </div>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Bag With Style</h1>
-      <p>Premium handcrafted goods inspired by my boyfriend.</p>
-      <button class="btn-main">Shop Now</button>
+  <div class="nav-right">
+    <a href="#">Home</a>
+    <i id="cart-icon" class="fa-solid fa-basket-shopping"></i>
+    <i id="fav-icon" class="fa-solid fa-heart"></i>
+    <a href="#"><i class="fa-solid fa-circle-user"></i></a>
+
+    <!-- Cart Dropdown -->
+    <div class="dropdown" id="cart-dropdown">
+      <ul id="cart-items"></ul>
+      <div id="cart-total" style="margin-top:10px; font-weight:700;">Total: $0.00</div>
     </div>
-  </section>
 
-  <!-- PRODUCTS -->
-  <section id="products" class="section">
-    <h2 class="section-title">Featured Products</h2>
-
-    <div class="products">
-
-      <div class="product-card">
-        <img src="https://cdn.pixabay.com/photo/2016/11/23/18/12/bag-1854148_1280.jpg" />
-        <div class="product-body">
-          <h3>Product 1</h3>
-          <div class="price">$100</div>
-          <a href="#" class="add-btn">Add to Cart</a>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <img src="https://www.craftpassion.com/wp-content/uploads/drawstring-crochet-bag-pattern-720x720.jpg" />
-        <div class="product-body">
-          <h3>Product 2</h3>
-          <div class="price">$150</div>
-          <a href="#" class="add-btn">Add to Cart</a>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <img src="https://craftedbycat.com/cdn/shop/files/ec50883d-il_fullxfull.6670010688_d051.jpg?v=1742297881&width=1946" />
-        <div class="product-body">
-          <h3>Product 3</h3>
-          <div class="price">$39.99</div>
-          <a href="#" class="add-btn">Add to Cart</a>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <img src="https://m.media-amazon.com/images/I/91XRHJDVHzL._AC_UY900_.jpg" />
-        <div class="product-body">
-          <h3>Product 4</h3>
-          <div class="price">$50</div>
-          <a href="#" class="add-btn">Add to Cart</a>
-        </div>
-      </div>
-
+    <!-- Favorites Dropdown -->
+    <div class="dropdown" id="fav-dropdown">
+      <ul id="fav-items"></ul>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- FOOTER -->
-  <footer id="contact">
-    <p>© 2025 Meston. All rights reserved.</p>
-    <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
-  </footer>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Bag With Style</h1>
+    <button class="btn-main">Shop Now</button>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products" class="section">
+  <h2 class="section-title">Featured Products</h2>
+
+  <div class="products">
+    <div class="product-card">
+      <img src="https://cdn.pixabay.com/photo/2016/11/23/18/12/bag-1854148_1280.jpg" />
+      <div class="product-body">
+        <h3>Leather Messenger Bag</h3>
+        <div class="price">$100</div>
+        <a href="#" class="add-btn">Add to Cart</a>
+        <a href="#" class="fav-btn">❤ Add to Favorites</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="https://www.craftpassion.com/wp-content/uploads/drawstring-crochet-bag-pattern-720x720.jpg" />
+      <div class="product-body">
+        <h3>Straw Crochet Beach Bag</h3>
+        <div class="price">$150</div>
+        <a href="#" class="add-btn">Add to Cart</a>
+        <a href="#" class="fav-btn">❤ Add to Favorites</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="https://craftedbycat.com/cdn/shop/files/ec50883d-il_fullxfull.6670010688_d051.jpg?v=1742297881&width=1946" />
+      <div class="product-body">
+        <h3>Granny Crochet Beach Bag</h3>
+        <div class="price">$39.99</div>
+        <a href="#" class="add-btn">Add to Cart</a>
+        <a href="#" class="fav-btn">❤ Add to Favorites</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/91XRHJDVHzL._AC_UY900_.jpg" />
+      <div class="product-body">
+        <h3>Daisy Crochet Bag</h3>
+        <div class="price">$50</div>
+        <a href="#" class="add-btn">Add to Cart</a>
+        <a href="#" class="fav-btn">❤ Add to Favorites</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <p>© 2025 Meston. All rights reserved.</p>
+  <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+</footer>
+
+<!-- Scripts -->
+<script>
+let cart = [];
+let favorites = [];
+
+const addButtons = document.querySelectorAll('.add-btn');
+const favButtons = document.querySelectorAll('.fav-btn');
+
+const cartIcon = document.getElementById('cart-icon');
+const favIcon = document.getElementById('fav-icon');
+
+const cartDropdown = document.getElementById('cart-dropdown');
+const favDropdown = document.getElementById('fav-dropdown');
+
+const cartItems = document.getElementById('cart-items');
+const favItems = document.getElementById('fav-items');
+const cartTotal = document.getElementById('cart-total');
+
+// Add to Cart
+addButtons.forEach(btn => {
+  btn.addEventListener('click', function(e){
+    e.preventDefault();
+    const productCard = this.closest('.product-card');
+    const name = productCard.querySelector('h3').textContent;
+    const priceText = productCard.querySelector('.price').textContent;
+    const price = parseFloat(priceText.replace('$',''));
+    cart.push({name, price});
+    updateCart();
+  });
+});
+
+// Add to Favorites
+favButtons.forEach(btn => {
+  btn.addEventListener('click', function(e){
+    e.preventDefault();
+    const productCard = this.closest('.product-card');
+    const name = productCard.querySelector('h3').textContent;
+    if(!favorites.includes(name)) {
+      favorites.push(name);
+      updateFavorites();
+    }
+  });
+});
+
+function updateCart(){
+  cartItems.innerHTML = '';
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    const li = document.createElement('li');
+    li.textContent = `${item.name} - $${item.price.toFixed(2)} `;
+
+    const removeBtn = document.createElement('button');
+    removeBtn.textContent = 'Remove';
+    removeBtn.addEventListener('click', () => {
+      cart.splice(index, 1);
+      updateCart();
+    });
+
+    li.appendChild(removeBtn);
+    cartItems.appendChild(li);
+    total += item.price;
+  });
+
+  cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+}
+
+function updateFavorites(){
+  favItems.innerHTML = '';
+  favorites.forEach((name, index) => {
+    const li = document.createElement('li');
+    li.textContent = name;
+
+    const removeBtn = document.createElement('button');
+    removeBtn.textContent = 'Remove';
+    removeBtn.addEventListener('click', () => {
+      favorites.splice(index,1);
+      updateFavorites();
+    });
+
+    li.appendChild(removeBtn);
+    favItems.appendChild(li);
+  });
+}
+
+// Toggle Dropdowns
+cartIcon.addEventListener('click', () => {
+  cartDropdown.classList.toggle('active');
+  favDropdown.classList.remove('active');
+});
+
+favIcon.addEventListener('click', () => {
+  favDropdown.classList.toggle('active');
+  cartDropdown.classList.remove('active');
+});
+
+document.addEventListener('click', function(e){
+  if(!cartDropdown.contains(e.target) && e.target !== cartIcon){
+    cartDropdown.classList.remove('active');
+  }
+  if(!favDropdown.contains(e.target) && e.target !== favIcon){
+    favDropdown.classList.remove('active');
+  }
+});
+</script>
 
 </body>
 </html>
